@@ -1,7 +1,12 @@
 A button for each store location
 Each button display name of location
+There should be a map
+There should be a header above the buttons
+
 Clicking a button passes a value to a function
+
+Done:
+-----
 A map chooser function that:
   - returns an image file name for each input
   - returns a default image if given no input or bad input
-  
