@@ -1,0 +1,7 @@
+A button for each store location
+Each button display name of location
+Clicking a button passes a value to a function
+A map chooser function that:
+  - returns an image file name for each input
+  - returns a default image if given no input or bad input
+  
