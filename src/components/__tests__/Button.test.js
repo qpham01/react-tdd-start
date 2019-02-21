@@ -34,6 +34,15 @@ describe("When a location is passed to a button", () => {
     const locName = mountedButton.find(".location-button");
     expect(locName.text()).toEqual("Location1");
   });
+
+  it("calls a function passed to it when clicked", () => {
+    const mockCallback = jest.fn();
+    const mountedButtonWithCallback = shallow(
+      <Button handleClick={mockCallback} />
+    );
+    mountedButtonWithCallback.find("button").simulate("click");
+    expect(mockCallback.mock.calls.length).toEqual(1);
+  });
 });
 
 describe("When a location is passed to a button", () => {

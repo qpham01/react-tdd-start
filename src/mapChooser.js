@@ -1,8 +1,8 @@
 function mapChooser(location) {
   if (!location) {
-    location = "default";
+    location = "none";
   }
-  return location + ".jpg";
+  return location + ".png";
 }
 
 export default mapChooser;

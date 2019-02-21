@@ -24,3 +24,13 @@ describe("Store", () => {
     expect(maps.length).toBe(1);
   });
 });
+
+describe("chooseMap", () => {
+  it("Updates this.state.currentMap with location prop", () => {
+    const testLand = "testland";
+    let wrapper = shallow(<StoreLocator />);
+    let mockEvent = { target: { value: testLand } };
+    wrapper.instance().chooseMap(mockEvent);
+    expect(wrapper.instance().state.currentMap).toBe(testLand + ".png");
+  });
+});
