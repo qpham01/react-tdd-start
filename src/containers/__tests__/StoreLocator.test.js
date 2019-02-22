@@ -1,13 +1,14 @@
 import React from "react";
 import { shallow } from "enzyme";
 import StoreLocator from "../StoreLocator";
+import axios from "axios";
 
 let mountedStoreLocator;
 beforeEach(() => {
   mountedStoreLocator = shallow(<StoreLocator />);
 });
 
-describe("Store", () => {
+describe("StoreLocator", () => {
   it("renders without crashing", () => {
     let mountedStoreLocator = shallow(<StoreLocator />);
   });
@@ -15,13 +16,41 @@ describe("Store", () => {
     const headers = mountedStoreLocator.find("Header");
     expect(headers.length).toBe(1);
   });
-  it("renders two buttons", () => {
-    const buttons = mountedStoreLocator.find("Button");
-    expect(buttons.length).toBe(3);
-  });
+
   it("renders a map", () => {
     const maps = mountedStoreLocator.find("Map");
     expect(maps.length).toBe(1);
+  });
+
+  it("calls axios.get in #componentDidMount", () => {
+    return mountedStoreLocator
+      .instance()
+      .componentDidMount()
+      .then(() => {
+        expect(axios.get).toHaveBeenCalled();
+      });
+  });
+
+  it("calls axios.get in #componentDidMount with correct URL", () => {
+    return mountedStoreLocator
+      .instance()
+      .componentDidMount()
+      .then(() => {
+        expect(axios.get).toHaveBeenCalledWith(
+          "http://localhost:3000/data/shops.json"
+        );
+      });
+  });
+
+  it("update state with api data", () => {
+    return mountedStoreLocator
+      .instance()
+      .componentDidMount()
+      .then(() => {
+        expect(mountedStoreLocator.state()).toHaveProperty("shops", [
+          { location: "test location", address: "test address" }
+        ]);
+      });
   });
 });
 
